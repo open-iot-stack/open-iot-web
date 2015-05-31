@@ -1,20 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
-
+<section class="hero">
 <div class="row">
+<h1>Devices</h1>
 {% for device in devices['data'] %}
+    <div class="small-3 columns">
     {% if device["manufacturer_device_model"] == "ge_zigbee_light" %}
         {% if device["desired_state"]["powered"] == true %}
-             <i class="button round fi fi-lightbulb on"></i>
+             <i class="button round fi fi-lightbulb on"></i><br>
 
                {% else %}
-         <i class="button round fi fi-lightbulb"></i>
+         <i class="button round fi fi-lightbulb"></i><br>
         {% endif %}
-         <b>{{ device["name"] }}</b><br>
+         <b class="text-center">{{ device["name"] }}</b>
     {% else %}
-         <b>{{ device["name"] }}</b><br>
+         <b  class="text-center">{{ device["name"] }}</b><br>
     {% endif %}
+    </div>
 {% endfor %}
-</div>
-
+</div></section>
+<hr>
 {% endblock %}
