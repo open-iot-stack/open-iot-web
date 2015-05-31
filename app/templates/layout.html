@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block layout %}
+<body>
+    <header>
+        <nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#"><span class="fi-home"></span></a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+{#    <ul class="right">#}
+{#      <li class="active"><a href="#">Home Online</a></li>#}
+{#      <li class="has-dropdown">#}
+{#        <a href="#">Sign in</a>#}
+{#        <ul class="dropdown">#}
+{#          <li><a href="#"><span class="fi-gear">Settings</span></a></li>#}
+{#          <li class="active"><a href="#">Log out</a></li>#}
+{#        </ul>#}
+{#      </li>#}
+{#    </ul>#}
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="/cc">Command Center</a></li>
+    </ul>
+  </section>
+</nav>
+    </header>
+    <article>
+        {% block body %}{% endblock %}
+    </article>
+    <footer></footer>
+</body>
+    <script src="{{ url_for('static', filename='js/foundation.min.js' ) }}"></script>
+
+{% endblock %}
