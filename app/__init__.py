@@ -37,18 +37,19 @@ def login():
     session["refresh_token"] = refresh_token
 
     print response_body
+    devices = listdevices();
+    return render_template('dashboard/index.html', devices=devices)
 
-    return render_template('dashboard/index.html')
 
 
-@app.route("/devices", methods=['GET'])
 def listdevices():
     token = session["access_token"]
     headers = {"Authorization": "Bearer " + token}
     request = Request("https://winkapi.quirky.com/users/me/wink_devices", headers=headers)
     response_body = urlopen(request).read()
+    data = json.loads(response_body)
     print response_body
-    return render_template('dashboard/index.html')
+    return dict(data)
 
 @app.errorhandler(404)
 def not_found(error):
