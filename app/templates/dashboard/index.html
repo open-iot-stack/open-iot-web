@@ -1,8 +1,22 @@
 {% extends "layout.html" %}
 {% block body %}
+    <html ng-app="BlackHoleApp">
+    <body ng-controller="WinkController">
+    <form role="form" ng-submit="getResults()">
 <section class="hero">
 <div class="row">
 <h1>Devices</h1>
+<input type="text" ng-model="input_url" name="url" class="form-control" id="url-box" placeholder="Enter URL..." style="max-width: 300px;">
+<div class="col-sm-5 col-sm-offset-1">
+      <br>
+      {% raw %}
+      <div id="results">
+
+          {{wordcounts}}
+
+      </div>
+      {% endraw %}
+    </div>
 {% for device in devices['data'] %}
     <div class="small-3 columns">
     {% if device["manufacturer_device_model"] == "ge_zigbee_light" %}
@@ -20,4 +34,7 @@
 {% endfor %}
 </div></section>
 <hr>
+
+    </form>
+
 {% endblock %}

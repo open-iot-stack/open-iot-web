@@ -51,6 +51,37 @@ def listdevices():
     print response_body
     return dict(data)
 
+
+@app.route("/update/device/<string:device_type>/<string:device_id>", methods=['PUT'])
+def update_device_state(device_type, device_id):
+    device_type = device_type
+    device_id = device_id
+    token = session["access_token"]
+    headers = {"Authorization": "Bearer " + token}
+    request = Request("https://winkapi.quirky.com/users/me/wink_devices/"+device_type+"/"+device_id, headers=headers)
+    response_body = urlopen(request).read()
+    data = json.loads(response_body)
+    print response_body
+    return dict(data)
+
+
+@app.route('/start', methods=['POST'])
+def get_counts():
+    # get url
+    data = json.loads(request.data.decode())
+    url = data["url"]
+    # form URL, id necessary
+
+    # return created job id
+    return url
+
+
+@app.route('/_session')
+def get_from_session():
+    key = request.params['key']
+    return session.get(key)
+
+
 @app.errorhandler(404)
 def not_found(error):
   return render_template('404.html'), 404
