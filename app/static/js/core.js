@@ -10,21 +10,38 @@ app.config(['$httpProvider', function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }])
 
-      app. controller('WinkController', ['$scope', '$log', '$http', '$timeout', function($scope, $log, $http,$timeout) {
+    app.factory('Token', ['$http', function ($http) {
+  return {
+    getToken: function (callback) {
+      $http.get('/session').success( function (res) {
+       callback(res)
+      })
+    }
+  }
+}])
+
+      app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token', function($scope, $log, $http,$timeout, Token) {
           $scope.getResults = function () {
               $log.log("test");
-
+        $scope.token = null
+        Token.getToken( function (res) {
+             $log.log(res);
+         $scope.token = res
+         })
             var timeout = "";
               var urlBase ="https://winkapi.quirky.com";
-              // get the URL from the input
-              var userInput = $scope.input_url;
+
 
               var poller = function () {
                   // fire the API request
-                  $http.get(urlBase+'/users/me/wink_devices').
+                  $http({method: 'GET',
+                  url:urlBase+'/users/me/wink_devices',
+                  headers:{
+                  Authorization : 'Bearer ' + $scope.token
+                     }}).
                       success(function (results) {
                           $log.log(results);
-                          $scope.wordcounts = results;
+                          $scope.devices = results.data;
                       }).
                       error(function (error) {
                           $log.log(error);

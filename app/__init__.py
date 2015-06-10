@@ -76,10 +76,9 @@ def get_counts():
     return url
 
 
-@app.route('/_session')
-def get_from_session():
-    key = request.params['key']
-    return session.get(key)
+@app.route('/session')
+def get_token_from_session():
+    return session["access_token"]
 
 
 @app.errorhandler(404)
