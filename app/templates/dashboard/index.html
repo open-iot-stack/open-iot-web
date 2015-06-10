@@ -6,43 +6,32 @@
 <section class="hero">
 <div class="row">
 <h1>Devices</h1>
-
+ <br>
 <div data-ng-controller="WinkController" data-ng-init="getResults()">
-<div class="col-sm-5 col-sm-offset-1">
-    <h1>API DEBUG (Polling Devices)</h1>
-      <br>
+
+
+
       {% raw %}
-      <div class="well" id="results">
+      <div id="results">
+
 <div ng-repeat="device in devices">
-<div ng-if="device.manufacturer_device_model == ge_zigbee_light">
-  
-</div>
-
-{{device.name}} - {{device.desired_state.powered}}
-
+     <div class="small-3 column">
+<div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
+    <div ng-if="device.desired_state.powered">
+         <a href="#"><i class="button round fi fi-lightbulb on"></i></a>
     </div>
-
-
+    <div ng-if="!device.desired_state.powered">
+    <a href="#"><i class="button round fi fi-lightbulb"></i></a>
+        </div>
+{{device.name}}
+</div>
+    </div>
       </div>
+          </div>
       {% endraw %}
-    </div>
-</div>
-{% for device in devices['data'] %}
-    <div class="small-3 columns">
-    {% if device["manufacturer_device_model"] == "ge_zigbee_light" %}
-        {% if device["desired_state"]["powered"] == true %}
-             <i class="button round fi fi-lightbulb on"></i><br>
 
-               {% else %}
-         <i class="button round fi fi-lightbulb"></i><br>
-        {% endif %}
-         <b class="text-center">{{ device["name"] }}</b>
-    {% else %}
-         <b  class="text-center">{{ device["name"] }}</b><br>
-    {% endif %}
-    </div>
-{% endfor %}
-</div></section>
+</div>
+</section>
 <hr>
 
 
