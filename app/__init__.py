@@ -37,8 +37,8 @@ def login():
     session["refresh_token"] = refresh_token
 
     print response_body
-    devices = listdevices();
-    return render_template('dashboard/index.html', devices=devices)
+
+    return render_template('dashboard/index.html')
 
 
 
