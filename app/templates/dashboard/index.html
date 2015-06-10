@@ -7,11 +7,10 @@
 <div class="row">
 <h1>Devices</h1>
  <br>
-<div data-ng-controller="WinkController" data-ng-init="getResults()">
 
-
-
+<div data-ng-controller="WinkController" data-ng-init="getDevices()">
       {% raw %}
+    <h2>Lights</h2>
       <div id="results">
 
 <div ng-repeat="device in devices">
