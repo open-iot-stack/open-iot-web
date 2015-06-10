@@ -21,7 +21,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 }])
 
       app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token', function($scope, $log, $http,$timeout, Token) {
-          $scope.getResults = function () {
+          $scope.getDevices = function () {
               $log.log("test");
         $scope.token = null
         Token.getToken( function (res) {
