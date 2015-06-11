@@ -5,7 +5,7 @@
         <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
-      <h1><a href="dashboard/index.html"><i class="fi fi-home"></i></a></h1>
+      <h1><a href="/dashboard"><i class="fi fi-home"></i></a></h1>
     </li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -15,7 +15,7 @@
 
     <!-- Left Nav Section -->
     <ul class="left">
-      <li><a href="dashboard/index.html">Control Center</a></li>
+      <li><a href="/dashboard">Control Center</a></li>
     </ul>
   </section>
 </nav>
@@ -27,10 +27,11 @@
 </body>
 
     <script src="{{ url_for('static', filename='js/angular.js' ) }}"></script>
-     <script src="{{ url_for('static', filename='js/angular-resource.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/angular-resource.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/core.js' ) }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js' ) }}"></script>
     <script src="{{ url_for('static', filename='js/foundation.min.js' ) }}"></script>
-    <script src="{{ url_for('static', filename='js/core.js' ) }}"></script>
+
 
 
 {% endblock %}

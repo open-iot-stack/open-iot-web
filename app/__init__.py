@@ -41,17 +41,6 @@ def login():
     return render_template('dashboard/index.html')
 
 
-
-def listdevices():
-    token = session["access_token"]
-    headers = {"Authorization": "Bearer " + token}
-    request = Request("https://winkapi.quirky.com/users/me/wink_devices", headers=headers)
-    response_body = urlopen(request).read()
-    data = json.loads(response_body)
-    print response_body
-    return dict(data)
-
-
 @app.route("/update/device/<string:device_type>/<string:device_id>", methods=['PUT'])
 def update_device_state(device_type, device_id):
     device_type = device_type
@@ -65,20 +54,14 @@ def update_device_state(device_type, device_id):
     return dict(data)
 
 
-@app.route('/start', methods=['POST'])
-def get_counts():
-    # get url
-    data = json.loads(request.data.decode())
-    url = data["url"]
-    # form URL, id necessary
-
-    # return created job id
-    return url
-
-
 @app.route('/session')
 def get_token_from_session():
     return session["access_token"]
+
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard/index.html')
 
 
 @app.errorhandler(404)

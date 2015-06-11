@@ -5,10 +5,7 @@
   var app = angular.module('BlackHoleApp', ['ngResource']);
 
 
-app.config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}])
+
 
     app.factory('Token', ['$http', function ($http) {
   return {
@@ -35,7 +32,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 
 
               var poller = function () {
-                  // fire the API request
+                  alert("polling");
                   $http({method: 'GET',
                   url:urlBase+'/users/me/wink_devices',
                   headers:{
@@ -55,15 +52,20 @@ app.config(['$httpProvider', function ($httpProvider) {
 poller();
           }
 
-            $scope.updateDeviceState = function (device_type, device_id) {
+            $scope.updateDeviceState = function (data) {
+                 var urlBase ="https://winkapi.quirky.com";
                  $scope.token = null
                 Token.getToken( function (res) {
                 //  $log.log(res);
                  $scope.token = res
                  })
+                    if(data.desired_state.powered){
+                        data.desired_state.powered = false;
+                    } else { data.desired_state.powered = true;}
 
                   $http({method: 'PUT',
-                  url:urlBase+'/users/me/wink_devices/'+device_type+"/"+device_id,
+                  url:urlBase+'/users/me/wink_devices/'+'light_bulb'+"/"+data.light_bulb_id,
+                      data: data,
                   headers:{
                   Authorization : 'Bearer ' + $scope.token
                      }}).
