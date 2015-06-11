@@ -20,12 +20,14 @@ app.config(['$httpProvider', function ($httpProvider) {
   }
 }])
 
+
+
       app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token', function($scope, $log, $http,$timeout, Token) {
           $scope.getDevices = function () {
-              $log.log("test");
+             // $log.log("test");
         $scope.token = null
         Token.getToken( function (res) {
-             $log.log(res);
+           //  $log.log(res);
          $scope.token = res
          })
             var timeout = "";
@@ -40,7 +42,7 @@ app.config(['$httpProvider', function ($httpProvider) {
                   Authorization : 'Bearer ' + $scope.token
                      }}).
                       success(function (results) {
-                          $log.log(results);
+                        //  $log.log(results);
                           $scope.devices = results.data;
                       }).
                       error(function (error) {
@@ -52,6 +54,27 @@ app.config(['$httpProvider', function ($httpProvider) {
               }
 poller();
           }
+
+            $scope.updateDeviceState = function (device_type, device_id) {
+                 $scope.token = null
+                Token.getToken( function (res) {
+                //  $log.log(res);
+                 $scope.token = res
+                 })
+
+                  $http({method: 'PUT',
+                  url:urlBase+'/users/me/wink_devices/'+device_type+"/"+device_id,
+                  headers:{
+                  Authorization : 'Bearer ' + $scope.token
+                     }}).
+                      success(function (results) {
+                        //  $log.log(results);
+                        //$scope.devices = results.data;
+                      }).
+                      error(function (error) {
+                          $log.log(error);
+                      });
+            }
 
       }
 

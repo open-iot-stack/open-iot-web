@@ -85,6 +85,12 @@ def get_token_from_session():
 def not_found(error):
   return render_template('404.html'), 404
 
+
+@app.errorhandler(405)
+def method_not_allowed(error):
+  return render_template('404.html'), 405
+
+
 from app.core.views import mod as core
 app.register_blueprint(core)
 
