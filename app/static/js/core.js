@@ -32,7 +32,7 @@
 
 
               var poller = function () {
-                 
+                  alert("polling");
                   $http({method: 'GET',
                   url:urlBase+'/users/me/wink_devices',
                   headers:{
