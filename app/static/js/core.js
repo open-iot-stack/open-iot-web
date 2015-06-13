@@ -1,15 +1,18 @@
 (function () {
 
   'use strict';
-
+    var token;
   var app = angular.module('BlackHoleApp', ['ngResource']);
     app.factory('Token', function ($http,$q) {
     return {
     getToken: function () {
+        if ( angular.isDefined( token ) ) return $q.when( token );
 
 
-
-      return $http.get('/session')
+      return $http.get('/session').then(function(payload){
+         token = payload.data;
+          return token;
+          })
     }
   }
 })
@@ -45,14 +48,14 @@
               var poller = function () {
 
                   Token.getToken().then(
-                      function (payload) {
-                          $scope.token = payload.data;
+                      function (token) {
+
                           var timeout = "";
                           $http({
                               method: 'GET',
                               url: urlBase + '/users/me/wink_devices',
                               headers: {
-                                  Authorization: 'Bearer ' + $scope.token
+                                  Authorization: 'Bearer ' + token
                               }
                           }).success(function (results) {
                               //  $log.log(results);
