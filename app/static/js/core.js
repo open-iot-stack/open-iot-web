@@ -93,7 +93,7 @@
                   url:urlBase+'/'+'light_bulbs'+'/'+data.light_bulb_id,
                       data: data,
                   headers:{
-                  Authorization : 'Bearer ' + $scope.token
+                  Authorization : 'Bearer ' + token
                      }}).
                       success(function (results) {
                         //  $log.log(results);

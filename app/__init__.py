@@ -66,12 +66,12 @@ def dashboard():
 
 @app.errorhandler(404)
 def not_found(error):
-  return render_template('404.html'), 404
+    return render_template('404.html'), 404
 
 
 @app.errorhandler(405)
 def method_not_allowed(error):
-  return render_template('404.html'), 405
+    return render_template('404.html'), 405
 
 
 from app.core.views import mod as core
