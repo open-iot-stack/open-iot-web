@@ -40,9 +40,19 @@ body{
 }
 @keyframes spin {
     from {
-        transform:rotate(0deg);
+        transform: rotate(0deg);
     }
     to {
-        transform:rotate(360deg);
+        transform: rotate(360deg);
     }
+}
+.icon{
+    text-shadow: 1px 1px 5px black;
+    font-size: 5em;
+}
+
+.on{
+    color: gold;
+    text-shadow: 1px -10px 100px #d1cc28;
+    font-size: 5em;
 }

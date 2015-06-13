@@ -21,10 +21,10 @@
      <div class="small-3 column">
 <div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
     <div ng-if="device.desired_state.powered">
-        <i ng-click="updateDeviceState(device)"  class="button round fi fi-lightbulb on"></i>
+        <i ng-click="updateDeviceState(device)"  class="button round fi fi-lightbulb icon on"></i>
     </div>
     <div ng-if="!device.desired_state.powered">
-    <i ng-click="updateDeviceState(device)" class="button round fi fi-lightbulb"></i>
+    <i ng-click="updateDeviceState(device)" class="button round fi fi-lightbulb icon "></i>
         </div>
 {{device.name}}
 </div>
