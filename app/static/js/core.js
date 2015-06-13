@@ -21,30 +21,6 @@
           $scope.getDevices = function () {
               var urlBase = "https://winkapi.quirky.com";
 
-              /*
-               var groups = function () {
-               $http({
-               method: 'GET',
-               url:urlBase+'/users/me/groups',
-               headers:{
-               Authorization : 'Bearer ' + $scope.token
-               }}).success(function (results) {
-               //  $log.log(results);
-               $scope.devices = results.data;
-               }).
-               error(function (error) {
-               $log.log(error);
-               });
-               // continue to call the poller() function every 2 seconds
-               // until the timeout is cancelled
-               timeout = $timeout(groups, 2000);
-               }
-               groups();
-               }
-               );
-               */
-
-
               var poller = function () {
 
                   Token.getToken().then(
@@ -72,6 +48,35 @@
 
 
               poller();
+          }
+
+
+          $scope.getGroups = function(data){
+              var urlBase = "https://winkapi.quirky.com";
+
+               var groups = function () {
+                   Token.getToken().then(
+                   function(token){
+                       var groupTimeout = "";
+                       $http({
+                        method: 'GET',
+                        url:urlBase+'/users/me/groups',
+                        headers:{
+                            Authorization : 'Bearer ' + token
+                        }
+                       }).success(function (results) {
+                   //  $log.log(results);
+                             $scope.groups = results.data;
+                       }).error(function (error) {
+                             $log.log(error);
+                       });
+                   // continue to call the poller() function every 2 seconds
+                   // until the timeout is cancelled
+                   groupTimeout = $timeout(groups, 2000);
+                   })
+               }
+               groups();
+
           }
             $scope.updateDeviceState = function (data) {
                  var urlBase ="https://winkapi.quirky.com";

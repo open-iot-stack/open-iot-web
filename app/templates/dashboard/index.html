@@ -3,42 +3,71 @@
     <html ng-app="BlackHoleApp">
     <body ng-controller="WinkController">
 
-<section class="hero">
-<div class="row">
-<h1>Devices</h1>
- <br>
+    <section class="hero">
+        <div class="row">
+            <h1>Devices</h1>
+            <br>
 
-<div data-ng-controller="WinkController" data-ng-init="getDevices()">
-      {% raw %}
-    <h2>Lights</h2>
-      <div id="results">
-<p class="text-center" ng-hide="devices">
-    <span class="fi fi-refresh refresh"></span>
-           <div ng-show="devices">
-<div ng-repeat="device in devices">
+            <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+                {% raw %}
+                <h2>Lights</h2>
+                <div id="results">
+                    <p class="text-center" ng-hide="devices">
+                        <span class="fi fi-refresh refresh"></span>
+                    <div ng-show="devices">
+                        <div ng-repeat="device in devices">
 
 
-     <div class="small-3 column">
-<div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
-    <div ng-if="device.desired_state.powered">
-        <i ng-click="updateDeviceState(device)"  class="button round fi fi-lightbulb icon on"></i>
-    </div>
-    <div ng-if="!device.desired_state.powered">
-    <i ng-click="updateDeviceState(device)" class="button round fi fi-lightbulb icon "></i>
-        </div>
-{{device.name}}
-</div>
-    </div>
+                            <div class="small-3 column">
+                                <div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
+                                    <div ng-if="device.desired_state.powered">
+                                        <i ng-click="updateDeviceState(device)"  class="button round fi fi-lightbulb icon on"></i>
+                                    </div>
+                                    <div ng-if="!device.desired_state.powered">
+                                        <i ng-click="updateDeviceState(device)" class="button round fi fi-lightbulb icon "></i>
+                                    </div>
+                                    {{device.name}}
+                                </div>
+                            </div>
 
-      </div>
+                        </div>
+                    </div>
+
                 </div>
-          </div>
-      {% endraw %}
+                {% endraw %}
 
-</div>
-    </div>
-</section>
-<hr>
+            </div>
+        </div>
+        <div class = "row">
+            <h1>Groups</h1>
+            <br>
+
+            <div data-ng-controller="WinkController" data-ng-init="getGroups()">
+{% raw %}
+
+
+            <div ng-show="groups">
+            <div ng-repeat="group in groups">
+
+                <div class="small-3 column">
+                    <div >
+                        <div ng-if="device.desired_state.powered">
+                            <i ng-click="updateDeviceState(device)"  class="button round fi fi-list-thumbnails icon on"></i>
+                        </div>
+                        <div ng-if="!device.desired_state.powered">
+                            <i ng-click="updateDeviceState(device)" class="button round fi fi-list-thumbnails icon "></i>
+                        </div>
+                    {{group.name}}
+                    </div>
+                </div>
+            </div>
+          </div>
+{% endraw %}
+        </div>
+        </div>
+
+    </section>
+    <hr>
 
 
 
