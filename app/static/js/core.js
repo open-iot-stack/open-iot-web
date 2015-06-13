@@ -32,7 +32,7 @@
 
 
               var poller = function () {
-
+                  alert("polling");
                   $http({method: 'GET',
                   url:urlBase+'/users/me/wink_devices',
                   headers:{
@@ -64,13 +64,13 @@ poller();
                     } else { data.desired_state.powered = true;}
 
                   $http({method: 'PUT',
-                  url:urlBase+'/'+'light_bulbs'+'/'+data.light_bulb_id,
+                  url:urlBase+'/users/me/wink_devices/'+'light_bulb'+"/"+data.light_bulb_id,
                       data: data,
                   headers:{
                   Authorization : 'Bearer ' + $scope.token
                      }}).
                       success(function (results) {
-                          $log.log(results);
+                        //  $log.log(results);
                         //$scope.devices = results.data;
                       }).
                       error(function (error) {
