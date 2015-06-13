@@ -21,24 +21,16 @@
 
       app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token', function($scope, $log, $http,$timeout, Token) {
           $scope.getDevices = function () {
-             // $log.log("test");
-        //$scope.token = null
-        Token.getToken( function (res) {
-           //  $log.log(res);
-         $scope.token = res
-         })
+            Token.getToken(function(res) { $scope.token = res });
             var timeout = "";
               var urlBase ="https://winkapi.quirky.com";
-
-
               var poller = function () {
-                 // alert("polling");
-                  $http({method: 'GET',
-                  url:urlBase+'/users/me/wink_devices',
-                  headers:{
-                  Authorization : 'Bearer ' + $scope.token
-                     }}).
-                      success(function (results) {
+                  $http({
+                      method: 'GET',
+                      url:urlBase+'/users/me/wink_devices',
+                      headers:{
+                        Authorization : 'Bearer ' + $scope.token
+                     }}).success(function (results) {
                         //  $log.log(results);
                           $scope.devices = results.data;
                       }).
@@ -47,9 +39,9 @@
                       });
                    // continue to call the poller() function every 2 seconds
         // until the timeout is cancelled
-        timeout = $timeout(poller, 2000);
+                timeout = $timeout(poller, 2000);
               }
-poller();
+            poller();
           }
 
             $scope.updateDeviceState = function (data) {
