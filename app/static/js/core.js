@@ -22,7 +22,7 @@
       app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token', function($scope, $log, $http,$timeout, Token) {
           $scope.getDevices = function () {
              // $log.log("test");
-        $scope.token = null
+        //$scope.token = null
         Token.getToken( function (res) {
            //  $log.log(res);
          $scope.token = res
@@ -32,7 +32,7 @@
 
 
               var poller = function () {
-                  alert("polling");
+                 // alert("polling");
                   $http({method: 'GET',
                   url:urlBase+'/users/me/wink_devices',
                   headers:{
@@ -54,7 +54,7 @@ poller();
 
             $scope.updateDeviceState = function (data) {
                  var urlBase ="https://winkapi.quirky.com";
-                 $scope.token = null
+                 //$scope.token = null
                 Token.getToken( function (res) {
                 //  $log.log(res);
                  $scope.token = res
@@ -64,7 +64,7 @@ poller();
                     } else { data.desired_state.powered = true;}
 
                   $http({method: 'PUT',
-                  url:urlBase+'/users/me/wink_devices/'+'light_bulb'+"/"+data.light_bulb_id,
+                  url:urlBase+'/'+'light_bulbs'+'/'+data.light_bulb_id,
                       data: data,
                   headers:{
                   Authorization : 'Bearer ' + $scope.token
