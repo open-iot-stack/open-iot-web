@@ -5,9 +5,9 @@ Right now it just works with any device compatible with wink.
 <br>
 <br>Its still a work in progress but a demo can be found <a href="home.nolanfoster.me"> here </a>
 <h2>Upcoming Features</h2>
-* support for open HAB
-* support for arduinos/rasberry pis
+* Support for arduinos/rasberry pis
 * Customizable Automation routines
+* Amazon Echo Support
 
 <h1>License</h1>
 The MIT License (MIT)
