@@ -1,29 +1,46 @@
 {% extends "base.html" %}
 {% block layout %}
 <body>
-    <header>
-        <nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="/dashboard"><i class="fi fi-home"></i></a></h1>
-    </li>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
 
-  <section class="top-bar-section">
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
 
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li><a href="/dashboard">Control Center</a></li>
-    </ul>
-  </section>
-</nav>
-    </header>
-    <article>
+      <section class="middle tab-bar-section">
+        <h1 class="title">Control Center</h1>
+      </section>
+
+
+    </nav>
+
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Devices</label></li>
+        <li><a href="/dashboard">All Devices</a></li>
+        <li><a href="/dashboard/groups">Groups</a></li>
+        <li><a href="/dashboard/lights">Lights</a></li>
+      </ul>
+    </aside>
+
+
+
+    <section class="main-section">
+      <!-- content goes here -->
+    </section>
+
+  <a class="exit-off-canvas"></a>
+  <article>
+
         {% block body %}{% endblock %}
     </article>
     <footer></footer>
+  </div>
+</div>
+
+
 </body>
 
     <script src="{{ url_for('static', filename='js/angular.js' ) }}"></script>
@@ -31,6 +48,7 @@
     <script src="{{ url_for('static', filename='js/core.js' ) }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js' ) }}"></script>
     <script src="{{ url_for('static', filename='js/foundation.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/site.js' ) }}"></script>
 
 
 

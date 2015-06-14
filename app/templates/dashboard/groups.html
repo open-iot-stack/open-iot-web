@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+    <html ng-app="BlackHoleApp">
+    <body ng-controller="WinkController">
+
+    <section class="hero">
+
+        <div class = "row">
+            <h1>Groups</h1>
+            <br>
+
+            <div data-ng-controller="WinkController" data-ng-init="getGroups()">
+{% raw %}
+
+<p class="text-center" ng-hide="groups">
+                        <span class="fi fi-refresh refresh"></span>
+            <div ng-show="groups">
+            <div ng-repeat="group in groups">
+
+                <div class="small-3 column">
+                    <div >
+                        <div ng-if="group.reading_aggregation.powered.true_count!=0">
+                            <i ng-click="updateDeviceState(device)"  class="button round fi fi-list-thumbnails icon on"></i>
+                        </div>
+                        <div ng-if="group.reading_aggregation.powered.true_count==0">
+                            <i ng-click="updateDeviceState(device)" class="button round fi fi-list-thumbnails icon "></i>
+                        </div>
+                    {{group.name}}
+                    </div>
+                </div>
+            </div>
+          </div>
+{% endraw %}
+        </div>
+        </div>
+
+    </section>
+    <hr>
+
+
+
+{% endblock %}

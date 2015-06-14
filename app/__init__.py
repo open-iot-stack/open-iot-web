@@ -64,6 +64,16 @@ def dashboard():
     return render_template('dashboard/index.html')
 
 
+@app.route('/dashboard/lights')
+def groups():
+    return render_template('dashboard/lights.html')
+
+
+@app.route('/dashboard/groups')
+def lights():
+    return render_template('dashboard/groups.html')
+
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
