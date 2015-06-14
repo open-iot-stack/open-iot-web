@@ -65,13 +65,24 @@ def dashboard():
 
 
 @app.route('/dashboard/lights')
-def groups():
+def lights():
     return render_template('dashboard/lights.html')
 
 
 @app.route('/dashboard/groups')
-def lights():
+def groups():
     return render_template('dashboard/groups.html')
+
+
+@app.route('/dashboard/robots')
+def robots():
+    return render_template('dashboard/robots.html')
+
+
+@app.route('/dashboard/routines')
+def routines():
+    return render_template('dashboard/routines.html')
+
 
 
 @app.errorhandler(404)

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block body %}
+    <html ng-app="BlackHoleApp">
+    <body ng-controller="WinkController">
+
+
+        <div class="row">
+
+            <div data-ng-controller="WinkController" data-ng-init="getRobots()">
+                {% raw %}
+                <h2>Robots</h2>
+                <div id="results">
+                    <p class="text-center" ng-hide="robots">
+                        <span class="fi fi-refresh refresh"></span>
+                    <div ng-show="robots">
+                        <div ng-repeat="bot in robots">
+
+
+                            <div class="small-3 column">
+                                <div ng-if="bot.manufacturer_device_model == 'ge_zigbee_light'">
+
+                                        <i ng-click="updateDeviceState(bot)" class="fi fi-social-android "></i><br>
+
+                                    {{bot.name}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                {% endraw %}
+
+            </div>
+        </div>
+
+
+
+    <hr>
+
+
+
+{% endblock %}

@@ -4,6 +4,33 @@
     <body ng-controller="WinkController">
 
     <section class="hero">
+          <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+                {% raw %}
+                <div class="row">
+                 <h2>Hubs</h2>
+                <div id="results">
+                    <p class="text-center" ng-hide="devices">
+                        <span class="fi fi-refresh refresh"></span>
+                    <div ng-show="devices">
+                        <div ng-repeat="device in devices">
+
+
+                            <div class="small-3 column">
+                                <div ng-if="device.name == 'Link hub'||device.name == 'Hub'">
+
+                                        <i ng-click="updateDeviceState(device)" class="fi fi-home icon "></i>
+                                    <br>
+                                    {{device.name}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                    </div>
+              {% endraw %}
+              </div>
          <div class = "row">
             <h2>Groups</h2>
             <br>
@@ -34,10 +61,10 @@
         </div>
 
 
-        <div class="row">
 
-            <div data-ng-controller="WinkController" data-ng-init="getDevices()">
-                {% raw %}
+  <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+      {% raw %}
+        <div class="row">
                 <h2>Lights</h2>
                 <div id="results">
                     <p class="text-center" ng-hide="devices">
@@ -62,10 +89,10 @@
                     </div>
 
                 </div>
+            </div>
                 {% endraw %}
 
             </div>
-        </div>
 
 
     </section>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block layout %}
+<body>
+
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+
+
+      <section class="middle tab-bar-section">
+        <h1 class="title">Control Center</h1>
+      </section>
+
+
+    </nav>
+
+
+
+    <section class="main-section">
+      <!-- content goes here -->
+    </section>
+
+  <a class="exit-off-canvas"></a>
+  <article>
+
+        {% block body %}{% endblock %}
+    </article>
+    <footer></footer>
+  </div>
+</div>
+
+
+</body>
+
+    <script src="{{ url_for('static', filename='js/angular.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/angular-resource.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/core.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/foundation.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/site.js' ) }}"></script>
+
+
+
+{% endblock %}

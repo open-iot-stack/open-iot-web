@@ -12,6 +12,9 @@
       <section class="middle tab-bar-section">
         <h1 class="title">Control Center</h1>
       </section>
+   <section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
 
 
     </nav>
@@ -25,18 +28,25 @@
       </ul>
     </aside>
 
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Controllers</label></li>
+        <li><a href="/dashboard/robots">Robots</a></li>
+          <li><a href="/dashboard/routines">Routines</a></li>
+      </ul>
+    </aside>
 
 
-    <section class="main-section">
-      <!-- content goes here -->
-    </section>
 
-  <a class="exit-off-canvas"></a>
-  <article>
+
+
+
+
 
         {% block body %}{% endblock %}
-    </article>
-    <footer></footer>
+
+    <footer class="text-center">Copyright &#xa9; Nolan Foster</footer>
+   <a class="exit-off-canvas"></a>
   </div>
 </div>
 
