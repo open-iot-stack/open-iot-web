@@ -20,7 +20,7 @@
 
                                         <i ng-click="updateDeviceState(device)" class="fi fi-home icon "></i>
                                     <br>
-                                    {{device.name}}
+                                   <h5>{{device.name}}</h5>
                                 </div>
                             </div>
 
@@ -51,7 +51,7 @@
                         <div ng-if="group.reading_aggregation.powered.true_count==0">
                             <i ng-click="updateDeviceState(device)" class="button round fi fi-list-thumbnails icon "></i>
                         </div>
-                    {{group.name}}
+                         <h5> {{group.name}}</h5>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                                     <div ng-if="!device.desired_state.powered">
                                         <i ng-click="updateDeviceState(device)" class="button round fi fi-lightbulb icon "></i>
                                     </div>
-                                    {{device.name}}
+                                    <h5>{{device.name}}</h5>
                                 </div>
                             </div>
 
@@ -95,6 +95,47 @@
             </div>
 
 
+  <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+      {% raw %}
+        <div class="row">
+                <h2>Switches</h2>
+                <div id="results">
+                    <p class="text-center" ng-hide="devices">
+                        <span class="fi fi-refresh refresh"></span>
+                    <div ng-show="devices">
+                        <div ng-repeat="device in devices">
+
+
+                            <div class="small-3 column">
+                                <div ng-if="device.model_name == 'Switch'">
+                                    <div class="switch large round">
+
+
+
+
+                                    <div ng-if="device.desired_state.powered">
+                                            <input id="z" name="switch-z" type="radio" checked>
+                                            <label for="z" ng-click="updateDeviceState(device)" >On</label>
+
+                                    </div>
+                                    <div ng-if="!device.desired_state.powered">
+                                            <input id="z" name="switch-z" type="radio">
+                                            <label for="z" ng-click="updateDeviceState(device)" >Off</label>
+                                    </div>
+                                         </div>
+                                    <h5>{{device.name}}</h5>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                {% endraw %}
+
+            </div>
     </section>
     <hr>
 

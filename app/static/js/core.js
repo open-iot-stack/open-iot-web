@@ -78,6 +78,34 @@
                groups();
 
           }
+
+                    $scope.getRobots = function(data){
+              var urlBase = "https://winkapi.quirky.com";
+
+               var robots = function () {
+                   Token.getToken().then(
+                   function(token){
+                       var botTimeout = "";
+                       $http({
+                        method: 'GET',
+                        url:urlBase+'/users/me/robots',
+                        headers:{
+                            Authorization : 'Bearer ' + token
+                        }
+                       }).success(function (results) {
+                   //  $log.log(results);
+                             $scope.robots = results.data;
+                       }).error(function (error) {
+                             $log.log(error);
+                       });
+                   // continue to call the poller() function every 2 seconds
+                   // until the timeout is cancelled
+                   botTimeout = $timeout(robots, 2000);
+                   })
+               }
+               robots();
+
+          }
             $scope.updateDeviceState = function (data) {
                  var urlBase ="https://winkapi.quirky.com";
                  //$scope.token = null
@@ -88,9 +116,18 @@
                     if(data.desired_state.powered){
                         data.desired_state.powered = false;
                     } else { data.desired_state.powered = true;}
+                    var type="";
+                    var id ="";
+                if(data.model_name == 'Switch'){
+                    type="binary_switches";
 
+                    id = data.binary_switch_id;
+                }else{
+                   type= "light_bulbs";
+                    id = data.light_bulb_id;
+                }
                   $http({method: 'PUT',
-                  url:urlBase+'/'+'light_bulbs'+'/'+data.light_bulb_id,
+                  url:urlBase+'/'+type+'/'+id,
                       data: data,
                   headers:{
                   Authorization : 'Bearer ' + token
