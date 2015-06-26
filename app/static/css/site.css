@@ -53,3 +53,7 @@ body{
     text-shadow: 1px -10px 100px #d1cc28;
     font-size: 5em;
 }
+
+.switch .switch-on input:checked{
+ background: gold;
+}

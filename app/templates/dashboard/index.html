@@ -136,6 +136,53 @@
                 {% endraw %}
 
             </div>
+
+          <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+      {% raw %}
+        <div class="row">
+
+                <div id="results">
+                    <p class="text-center" ng-hide="devices">
+                        <span class="fi fi-refresh refresh"></span>
+                    <div ng-show="devices">
+                        <div ng-repeat="device in devices">
+
+
+
+                                <div ng-if="device.model_name == 'Refuel'" data-ng-init="getGrillStats(device)">
+
+                                    <h2>Refuel</h2>
+                                  <div class="progress large radius round">
+                                    <span class="meter" style="width: {{ device.last_reading.remaining * 100}}%">
+
+                                    </span>
+                                    </div>
+                                    <h4>{{ device.last_reading.remaining * 100}}% of the fuel is remaining.</h4>
+
+
+                                        <div class="panel">
+
+                                            <h5>Average Grill Time - {{ grill_stats.average_grill_time }}</h5>
+                                        <br><h5>Average Grills Per Tank - {{ grill_stats.average_grills_per_tank }}</h5>
+                                        <br><h5>Average Tank Life(cum.) -  {{ grill_stats.average_tank_life_cumulative }}</h5>
+                                        <br><h5>Average Tank Life(real) - {{ grill_stats.average_tank_life_real }}</h5>
+                                        <br><h5>Cumulative Tanks Used - {{ grill_stats.cumulative_tanks_used }}</h5>
+
+                                      </div>
+
+                                   
+                                </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                {% endraw %}
+
+            </div>
     </section>
     <hr>
 
