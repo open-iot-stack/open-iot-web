@@ -1,191 +1,147 @@
-{% extends "layout.html" %}
-{% block body %}
-    <html ng-app="BlackHoleApp">
-    <body ng-controller="WinkController">
+    {% extends "layout.html" %}
+	{% block body %}
+		<html ng-app="BlackHoleApp">
+		<body ng-controller="WinkController">
+		<section class="hero"  ng-cloak>
+			  <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+				   <md-progress-linear ng-hide="devices" md-mode="indeterminate"></md-progress-linear>
+					{% raw %}
+						<div ng-show="devices">
+							<div ng-repeat="device in devices">
+								<div class="medium-4 column">
+									<div ng-if="device.name == 'Link hub'||device.name == 'Hub'">
+										 <md-card>
+							 <md-card-content>
+								 <md-list-item class="md-4-line">
+								<div class="md-list-item-text">
+								<h3><b>{{device.name}}</b></h3>
+									<p><b>Firmware Version:</b>{{device.last_reading.firmware_version}}</p>
+								 </div>
+								</md-list-item>
+							  </md-card-content>
+							 </md-card>
+									</div>
+								</div>
 
-    <section class="hero">
-          <div data-ng-controller="WinkController" data-ng-init="getDevices()">
-                {% raw %}
-                <div class="row">
-                 <h2>Hubs</h2>
-                <div id="results">
-                    <p class="text-center" ng-hide="devices">
-                        <span class="fi fi-refresh refresh"></span>
-                    <div ng-show="devices">
-                        <div ng-repeat="device in devices">
+				  {% endraw %}
+		  {% raw %}
+								<div class="medium-4 column">
 
+									<div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
 
-                            <div class="small-3 column">
-                                <div ng-if="device.name == 'Link hub'||device.name == 'Hub'">
+										<md-card>
+											<md-toolbar class="demo">
+                                                   <div class="md-toolbar-tools">
+						<md-button class="md-fab md-primary md-button" ng-click="updateDeviceState(device)" aria-label="menu">
+										<div ng-if="device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-lightbulb" style="color: yellow;"/>
+										</div>
+										<div ng-if="!device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-lightbulb" style="color: whitesmoke;"/>
+										</div>
+										</md-button>
+                                                       <h3><b>{{device.name}}</b></h3>
+                                                     <span flex></span>
+                                                 <md-switch class="md-primary" ng-click="updateDeviceState(device)" ng-model="device.desired_state.powered" aria-label="Switch 1">
+                                           </md-switch>
+                                                       </div>
+							 </md-toolbar>
+											 <md-card-content>
+								 <md-list-item class="md-4-line">
 
-                                        <i ng-click="updateDeviceState(device)" class="fi fi-home icon "></i>
-                                    <br>
-                                   <h4>{{device.name}}</h4>
-                                </div>
-                            </div>
+									   <div class="md-list-item-text">
+											<p><b>Brightness:</b>{{device.desired_state.brightness}},<b>Powered:</b>{{device.desired_state.powered}}</p>
+												</div>
+												  </md-list-item>
+											</md-card-content>
+										</md-card>
 
-                        </div>
-                    </div>
+						</div>
+					</div>
 
-                </div>
-                    </div>
-              {% endraw %}
-              </div>
-         <div class = "row">
-            <h2>Groups</h2>
-            <br>
+					{% endraw %}
 
-            <div data-ng-controller="WinkController" data-ng-init="getGroups()">
-{% raw %}
-
-<p class="text-center" ng-hide="groups">
-                        <span class="fi fi-refresh refresh"></span>
-            <div ng-show="groups">
-            <div ng-repeat="group in groups">
-
-                <div class="small-3 column">
-                    <div >
-                        <div ng-if="group.reading_aggregation.powered.true_count!=0">
-                            <i ng-click="updateGroupState(group)"  class="button round fi fi-list-thumbnails icon on"></i>
-                        </div>
-                        <div ng-if="group.reading_aggregation.powered.true_count==0">
-                            <i ng-click="updateGroupState(group)" class="button round fi fi-list-thumbnails icon "></i>
-                        </div>
-                         <h4> {{group.name}}</h4>
-                    </div>
-                </div>
-            </div>
-          </div>
-{% endraw %}
-        </div>
-        </div>
-
-
-
-  <div data-ng-controller="WinkController" data-ng-init="getDevices()">
-      {% raw %}
-        <div class="row">
-                <h2>Lights</h2>
-                <div id="results">
-                    <p class="text-center" ng-hide="devices">
-                        <span class="fi fi-refresh refresh"></span>
-                    <div ng-show="devices">
-                        <div ng-repeat="device in devices">
-
-
-                            <div class="small-3 column">
-                                <div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
-                                    <div ng-if="device.desired_state.powered">
-                                        <i ng-click="updateDeviceState(device)"  class="button round fi fi-lightbulb icon on"></i>
-                                    </div>
-                                    <div ng-if="!device.desired_state.powered">
-                                        <i ng-click="updateDeviceState(device)" class="button round fi fi-lightbulb icon "></i>
-                                    </div>
-                                    <h4>{{device.name}}</h4>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-                {% endraw %}
-
-            </div>
-
-
-  <div data-ng-controller="WinkController" data-ng-init="getDevices()">
-      {% raw %}
-        <div class="row">
-                <h2>Switches</h2>
-                <div id="results">
-                    <p class="text-center" ng-hide="devices">
-                        <span class="fi fi-refresh refresh"></span>
-                    <div ng-show="devices">
-                        <div ng-repeat="device in devices">
-
-
-                            <div class="small-3 column">
-                                <div ng-if="device.model_name == 'Switch'">
-                                    <div class="switch large round">
+		  {% raw %}
 
 
 
+								<div class="medium-4 column">
+									<div ng-if="device.model_name == 'Switch'">
+                                        <md-card>
+											<md-toolbar class="demo">
+                                                 <div class="md-toolbar-tools">
+						<md-button class="md-fab md-primary md-button" ng-click="updateDeviceState(device)" aria-label="menu">
+										<div ng-if="device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-power" style="color: yellow;"/>
+										</div>
+										<div ng-if="!device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-power" style="color: whitesmoke;"/>
+										</div>
+										</md-button>
+                                                     <h3><b>{{device.name}}</b></h3>
+                                                     <span flex></span>
+                                                 <md-switch class="md-primary" ng-click="updateDeviceState(device)" ng-model="device.desired_state.powered" aria-label="Switch 1">
+                                           </md-switch>
+                                                     </div>
+							 </md-toolbar>
+											 <md-card-content>
+								 <md-list-item class="md-4-line">
+                                     <div class="md-list-item-text">
 
-                                    <div ng-if="device.desired_state.powered">
-                                            <input id="z" name="switch-z switch-on" type="radio" checked>
-                                            <label for="z" ng-click="updateDeviceState(device)" >On</label>
-
-                                    </div>
-                                    <div ng-if="!device.desired_state.powered">
-                                            <input id="z" name="switch-z" type="radio">
-                                            <label for="z" ng-click="updateDeviceState(device)" >Off</label>
-                                    </div>
+                                     <p> <b>State:</b> {{device.desired_state.powered }}</p>
                                          </div>
-                                    <h4>{{device.name}}</h4>
-                                </div>
+                                     	  </md-list-item>
+											</md-card-content>
+										</md-card>
 
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-                {% endraw %}
-
-            </div>
-
-          <div data-ng-controller="WinkController" data-ng-init="getDevices()">
-      {% raw %}
-        <div class="row">
-
-                <div id="results">
-                    <p class="text-center" ng-hide="devices">
-                        <span class="fi fi-refresh refresh"></span>
-                    <div ng-show="devices">
-                        <div ng-repeat="device in devices">
-
-
-
-                                <div ng-if="device.model_name == 'Refuel'" data-ng-init="getGrillStats(device)">
-
-                                    <h2>Refuel</h2>
-                                  <div class="progress large radius round">
-                                    <span class="meter" style="width: {{ device.last_reading.remaining * 100}}%">
-
-                                    </span>
+							</div>
                                     </div>
-                                    <h4>{{ device.last_reading.remaining * 100}}% of the fuel is remaining.</h4>
 
+					{% endraw %}
 
-                                        <div class="panel">
+		  {% raw %}
 
-                                            <h5>Average Grill Time - {{ grill_stats.average_grill_time }}</h5>
-                                        <br><h5>Average Grills Per Tank - {{ grill_stats.average_grills_per_tank }}</h5>
-                                        <br><h5>Average Tank Life(cum.) -  {{ grill_stats.average_tank_life_cumulative }}</h5>
-                                        <br><h5>Average Tank Life(real) - {{ grill_stats.average_tank_life_real }}</h5>
-                                        <br><h5>Cumulative Tanks Used - {{ grill_stats.cumulative_tanks_used }}</h5>
+                                <div class="medium-4 column">
+									<div ng-if="device.model_name == 'Refuel'" data-ng-init="getGrillStats(device)">
+										<md-card>
+                            <md-toolbar class="demo">
+                                   <div class="md-toolbar-tools">
+						<md-button class="md-fab md-primary md-button" ng-click="updateGroupState(group)" aria-label="menu">
+											<md-icon md-font-icon="icon fi fi-info" style="color: whitesmoke;"/>
+										</md-button>
 
-                                      </div>
+                                <h3><b>{{ device.name }}</b></h3>
 
-                                   
+</div>
+							 </md-toolbar>
+                                            <md-card-content>
+								 <md-list-item class="md-4-line">
+                                     <div class="md-list-item-text">
+ <md-progress-linear class="md-primary" md-mode="determinate" value="{{device.last_reading.remaining*100}}"></md-progress-linear>
+                                     <p>
+                                        {{ device.last_reading.remaining * 100}}% of the fuel is remaining.
+                                        <br> Average Grill Time - {{ grill_stats.average_grill_time }}
+										<br>	Average Grills Per Tank - {{ grill_stats.average_grills_per_tank }}
+										<br>	Average Tank Life(cum.) -  {{ grill_stats.average_tank_life_cumulative }}
+										<br>	Average Tank Life(real) - {{ grill_stats.average_tank_life_real }}
+										<br>	Cumulative Tanks Used - {{ grill_stats.cumulative_tanks_used }}
+                        </p>
+                                         </div>
+
+                                     	  </md-list-item>
+											</md-card-content>
+										</md-card>
+                                </div>
+                                                </div>
+                            {% endraw %}
+                            </div>
                                 </div>
 
 
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-                {% endraw %}
-
-            </div>
-    </section>
-    <hr>
+					</div>
+		</section>
+		<hr>
 
 
 
-{% endblock %}
+	{% endblock %}

@@ -2,7 +2,7 @@
 
   'use strict';
     var token;
-  var app = angular.module('BlackHoleApp', ['ngResource']);
+  var app = angular.module('BlackHoleApp', ['ngResource','ngMaterial']);
     app.factory('Token', function ($http,$q) {
     return {
     getToken: function () {
@@ -18,6 +18,12 @@
 })
 
       app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token', function($scope, $log, $http,$timeout, Token) {
+          $scope.isOpen = false;
+      $scope.demo = {
+        isOpen: false,
+        count: 0,
+        selectedAlignment: 'md-left'
+      };
           $scope.getDevices = function () {
               var urlBase = "https://winkapi.quirky.com";
 
@@ -210,3 +216,11 @@ function convertToTime(unixTime){
                 var iso = date.toISOString().match(/(\d{2}:\d{2}:\d{2})/);
     return iso[0];
 }
+
+angular.module('buttonsDemo1', ['ngMaterial'])
+.controller('WinkController', function($scope) {
+  $scope.title1 = 'Button';
+  $scope.title4 = 'Warn';
+  $scope.isDisabled = true;
+  $scope.googleUrl = 'http://google.com';
+});

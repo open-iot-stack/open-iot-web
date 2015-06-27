@@ -1,7 +1,9 @@
 body{
-
+background-color: whitesmoke;
 }
-
+.fabToolbardemoBasicUsage md-toolbar.md-left md-fab-trigger.align-with-text {
+    background-color: #1a1a1a;
+  left: 7px; }
 .refresh {
     margin: 20px;
     font-size: 5em;
@@ -44,14 +46,20 @@ body{
     }
 }
 .icon{
-    text-shadow: 1px 1px 5px black;
-    font-size: 5em;
+
+    font-size: 2em;
+
 }
 
+.demo{
+    background-color: lightgray;
+}
 .on{
     color: gold;
     text-shadow: 1px -10px 100px #d1cc28;
-    font-size: 5em;
+    font-size: 2em;
+        padding-top: 0%;
+    padding-bottom: 1%;
 }
 
 .switch .switch-on input:checked{

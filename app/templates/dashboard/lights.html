@@ -3,40 +3,86 @@
     <html ng-app="BlackHoleApp">
     <body ng-controller="WinkController">
 
-    <section class="hero">
-        <div class="row">
+    <section class="hero"  ng-cloak>
+          <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+				   <md-progress-linear ng-hide="devices" md-mode="indeterminate"></md-progress-linear>
+					{% raw %}
+						<div ng-show="devices">
+							<div ng-repeat="device in devices">
+	<div class="medium-4 column">
 
-            <div data-ng-controller="WinkController" data-ng-init="getDevices()">
-                {% raw %}
-                <h2>Lights</h2>
-                <div id="results">
-                    <p class="text-center" ng-hide="devices">
-                        <span class="fi fi-refresh refresh"></span>
-                    <div ng-show="devices">
-                        <div ng-repeat="device in devices">
+									<div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
+
+										<md-card>
+											<md-toolbar class="demo">
+                                                   <div class="md-toolbar-tools">
+						<md-button class="md-fab md-primary md-button" ng-click="updateDeviceState(device)" aria-label="menu">
+										<div ng-if="device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-lightbulb" style="color: yellow;"/>
+										</div>
+										<div ng-if="!device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-lightbulb" style="color: whitesmoke;"/>
+										</div>
+										</md-button>
+                                                       <h3><b>{{device.name}}</b></h3>
+                                                     <span flex></span>
+                                                 <md-switch class="md-primary" ng-click="updateDeviceState(device)" ng-model="device.desired_state.powered" aria-label="Switch 1">
+                                           </md-switch>
+                                                       </div>
+							 </md-toolbar>
+											 <md-card-content>
+								 <md-list-item class="md-4-line">
+
+									   <div class="md-list-item-text">
+											<p><b>Brightness:</b>{{device.desired_state.brightness}},<b>Powered:</b>{{device.desired_state.powered}}</p>
+												</div>
+												  </md-list-item>
+											</md-card-content>
+										</md-card>
+
+						</div>
+					</div>
+
+					{% endraw %}
+
+		  {% raw %}
 
 
-                            <div class="small-3 column">
-                                <div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
-                                    <div ng-if="device.desired_state.powered">
-                                        <i ng-click="updateDeviceState(device)"  class="button round fi fi-lightbulb icon on"></i>
+
+								<div class="medium-4 column">
+									<div ng-if="device.model_name == 'Switch'">
+                                        <md-card>
+											<md-toolbar class="demo">
+                                                 <div class="md-toolbar-tools">
+						<md-button class="md-fab md-primary md-button" ng-click="updateDeviceState(device)" aria-label="menu">
+										<div ng-if="device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-power" style="color: yellow;"/>
+										</div>
+										<div ng-if="!device.desired_state.powered">
+											<md-icon md-font-icon="icon fi fi-power" style="color: whitesmoke;"/>
+										</div>
+										</md-button>
+                                                     <h3><b>{{device.name}}</b></h3>
+                                                     <span flex></span>
+                                                 <md-switch class="md-primary" ng-click="updateDeviceState(device)" ng-model="device.desired_state.powered" aria-label="Switch 1">
+                                           </md-switch>
+                                                     </div>
+							 </md-toolbar>
+											 <md-card-content>
+								 <md-list-item class="md-4-line">
+                                     <div class="md-list-item-text">
+
+                                     <p> <b>State:</b> {{device.desired_state.powered }}</p>
+                                         </div>
+                                     	  </md-list-item>
+											</md-card-content>
+										</md-card>
+
+							</div>
                                     </div>
-                                    <div ng-if="!device.desired_state.powered">
-                                        <i ng-click="updateDeviceState(device)" class="button round fi fi-lightbulb icon "></i>
-                                    </div>
-                                    {{device.name}}
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-
-                </div>
-                {% endraw %}
-
-            </div>
-        </div>
-
+					{% endraw %}
+                                </div></div></div>
 
     </section>
     <hr>

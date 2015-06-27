@@ -3,37 +3,45 @@
     <html ng-app="BlackHoleApp">
     <body ng-controller="WinkController">
 
-    <section class="hero">
+    <section class="hero"  ng-cloak>
+				<div data-ng-controller="WinkController" data-ng-init="getGroups()">
+                     <md-progress-linear ng-hide="groups" md-mode="indeterminate"></md-progress-linear>
+	{% raw %}
 
-        <div class = "row">
-            <h1>Groups</h1>
-            <br>
 
-            <div data-ng-controller="WinkController" data-ng-init="getGroups()">
-{% raw %}
-
-<p class="text-center" ng-hide="groups">
-                        <span class="fi fi-refresh refresh"></span>
-            <div ng-show="groups">
-            <div ng-repeat="group in groups">
-
-                <div class="small-3 column">
-                    <div >
-                        <div ng-if="group.reading_aggregation.powered.true_count!=0">
-                            <i ng-click="updateDeviceState(device)"  class="button round fi fi-list-thumbnails icon on"></i>
-                        </div>
-                        <div ng-if="group.reading_aggregation.powered.true_count==0">
-                            <i ng-click="updateDeviceState(device)" class="button round fi fi-list-thumbnails icon "></i>
-                        </div>
-                    {{group.name}}
-                    </div>
-                </div>
-            </div>
-          </div>
-{% endraw %}
-        </div>
-        </div>
-
+				<div ng-show="groups">
+				<div ng-repeat="group in groups">
+					<div class="medium-4 column">
+						<md-card>
+                            <md-toolbar class="demo">
+                                   <div class="md-toolbar-tools">
+						<md-button class="md-fab md-primary md-button" ng-click="updateGroupState(group)" aria-label="menu">
+										<div ng-if="group.reading_aggregation.powered.or">
+											<md-icon md-font-icon="icon fi fi-lightbulb" style="color: yellow;"/>
+										</div>
+										<div ng-if="!group.reading_aggregation.powered.or">
+											<md-icon md-font-icon="icon fi fi-lightbulb" style="color: whitesmoke;"/>
+										</div>
+										</md-button>
+                                         <h3><b>{{group.name}}</b></h3>
+                                                     <span flex></span>
+                                                 <md-switch class="md-primary" ng-click="updateGroupState(group)" ng-model="group.reading_aggregation.powered.or" aria-label="Switch 1">
+                                           </md-switch>
+                                       </div>
+							 </md-toolbar>
+							<md-card-content>
+								<md-list-item class="md-4-line">
+							 <div class="md-list-item-text">
+								 <p>Devices: {{group.members.length}}</p>
+							  </div>
+								</md-list-item>
+							</md-card-content>
+						</md-card>
+					</div>
+				</div>
+			  </div>
+	{% endraw %}
+			</div>
     </section>
     <hr>
 
