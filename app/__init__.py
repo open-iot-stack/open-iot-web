@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, json
+from flask import Flask, render_template, request, session, json, redirect, url_for
 from urllib2 import Request, urlopen
 from json import dumps
 # from flask.ext.sqlalchemy import SQLAlchemy
@@ -7,7 +7,6 @@ app = Flask(__name__)
 app.config.from_object('app.config')
 
 # db = SQLAlchemy(app)
-
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -38,7 +37,7 @@ def login():
 
     print response_body
 
-    return render_template('dashboard/index.html')
+    return redirect(url_for('dashboard'))
 
 
 @app.route("/update/device/<string:device_type>/<string:device_id>", methods=['PUT'])
@@ -61,29 +60,32 @@ def get_token_from_session():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard/index.html')
-
+    return render_template('view/dashboard/index.html')
 
 @app.route('/dashboard/lights')
 def lights():
-    return render_template('dashboard/lights.html')
-
+    return render_template('view/dashboard/lights.html')
 
 @app.route('/dashboard/groups')
 def groups():
-    return render_template('dashboard/groups.html')
+    return render_template('view/dashboard/groups.html')
 
 
 @app.route('/dashboard/robots')
 def robots():
-    return render_template('dashboard/robots.html')
+    return render_template('view/dashboard/Robots.html')
 
 
 @app.route('/dashboard/routines')
 def routines():
-    return render_template('dashboard/routines.html')
+    return render_template('view/dashboard/routines.html')
 
 
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
 
 @app.errorhandler(404)
 def not_found(error):
@@ -93,6 +95,7 @@ def not_found(error):
 @app.errorhandler(405)
 def method_not_allowed(error):
     return render_template('404.html'), 405
+
 
 
 from app.core.views import mod as core

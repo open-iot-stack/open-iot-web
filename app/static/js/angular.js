@@ -21207,13 +21207,13 @@ var ngCloakDirective = ngDirective({
  *
  * @description
  * The `ngController` directive attaches a controller class to the view. This is a key aspect of how angular
- * supports the principles behind the Model-View-Controller design pattern.
+ * supports the principles behind the Model-view-Controller design pattern.
  *
  * MVC components in angular:
  *
  * * Model — Models are the properties of a scope; scopes are attached to the DOM where scope properties
  *   are accessed through bindings.
- * * View — The template (HTML with data bindings) that is rendered into the View.
+ * * view — The template (HTML with data bindings) that is rendered into the view.
  * * Controller — The `ngController` directive specifies a Controller class; the class contains business
  *   logic behind the application to decorate the scope with functions and values
  *
@@ -21240,7 +21240,7 @@ var ngCloakDirective = ngDirective({
  * Here is a simple form for editing user contact information. Adding, removing, clearing, and
  * greeting are methods declared on the controller (see source tab). These methods can
  * easily be called from the angular markup. Any changes to the data are automatically reflected
- * in the View without the need for a manual update.
+ * in the view without the need for a manual update.
  *
  * Two different declaration styles are included below:
  *

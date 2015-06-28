@@ -6,5 +6,9 @@ mod = Blueprint('core', __name__)
 
 @mod.route('/')
 def index():
-  repository = Repository()
-  return (render_template('core/index.html', resources=repository.getResources()))
+    if 'access_token' in session:
+        return redirect(url_for('dashboard'))
+
+  #repository = Repository()
+    return (render_template('core/index.html'))
+

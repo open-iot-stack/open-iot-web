@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
-{% block body %}
-    <html ng-app="BlackHoleApp">
-    <body ng-controller="WinkController">
+	{% block body %}
+<body ng-controller="RobotsController">
 
 
         <div class="row">
@@ -17,12 +16,12 @@
 
 
                             <div class="small-3 column">
-                                <div ng-if="bot.manufacturer_device_model == 'ge_zigbee_light'">
+
 
                                         <i ng-click="updateDeviceState(bot)" class="fi fi-social-android "></i><br>
 
                                     {{bot.name}}
-                                </div>
+
                             </div>
 
                         </div>
@@ -33,11 +32,5 @@
 
             </div>
         </div>
-
-
-
-    <hr>
-
-
-
-{% endblock %}
+</body>
+	{% endblock %}

@@ -1,15 +1,31 @@
-{% extends "layout.html" %}
-{% block body %}
-    <html ng-app="BlackHoleApp">
-    <body ng-controller="WinkController">
+    {% extends "layout.html" %}
+	{% block body %}
 
-    <section class="hero"  ng-cloak>
-          <div data-ng-controller="WinkController" data-ng-init="getDevices()">
+		<body ng-controller="WinkController">
+		<section class="hero"  ng-cloak>
+			  <div data-ng-controller="WinkController" data-ng-init="getDevices()">
 				   <md-progress-linear ng-hide="devices" md-mode="indeterminate"></md-progress-linear>
 					{% raw %}
 						<div ng-show="devices">
 							<div ng-repeat="device in devices">
-	<div class="medium-4 column">
+								<div class="medium-4 column">
+									<div ng-if="device.name == 'Link hub'||device.name == 'Hub'">
+										 <md-card>
+							 <md-card-content>
+								 <md-list-item class="md-4-line">
+								<div class="md-list-item-text">
+								<h3><b>{{device.name}}</b></h3>
+									<p><b>Firmware Version:</b>{{device.last_reading.firmware_version}}</p>
+								 </div>
+								</md-list-item>
+							  </md-card-content>
+							 </md-card>
+									</div>
+								</div>
+
+				  {% endraw %}
+		  {% raw %}
+								<div class="medium-4 column">
 
 									<div ng-if="device.manufacturer_device_model == 'ge_zigbee_light'">
 
@@ -82,11 +98,50 @@
                                     </div>
 
 					{% endraw %}
-                                </div></div></div>
 
-    </section>
-    <hr>
+		  {% raw %}
+
+                                <div class="medium-4 column">
+									<div ng-if="device.model_name == 'Refuel'" data-ng-init="getGrillStats(device)">
+										<md-card>
+                            <md-toolbar class="demo">
+                                   <div class="md-toolbar-tools">
+						<md-button class="md-fab md-primary md-button" ng-click="updateGroupState(group)" aria-label="menu">
+											<md-icon md-font-icon="icon fi fi-info" style="color: whitesmoke;"/>
+										</md-button>
+
+                                <h3><b>{{ device.name }}</b></h3>
+
+</div>
+							 </md-toolbar>
+                                            <md-card-content>
+								 <md-list-item class="md-4-line">
+                                     <div class="md-list-item-text">
+ <md-progress-linear class="md-primary" md-mode="determinate" value="{{device.last_reading.remaining*100}}"></md-progress-linear>
+                                     <p>
+                                        {{ device.last_reading.remaining * 100}}% of the fuel is remaining.
+                                        <br> Average Grill Time - {{ grill_stats.average_grill_time }}
+										<br>	Average Grills Per Tank - {{ grill_stats.average_grills_per_tank }}
+										<br>	Average Tank Life(cum.) -  {{ grill_stats.average_tank_life_cumulative }}
+										<br>	Average Tank Life(real) - {{ grill_stats.average_tank_life_real }}
+										<br>	Cumulative Tanks Used - {{ grill_stats.cumulative_tanks_used }}
+                        </p>
+                                         </div>
+
+                                     	  </md-list-item>
+											</md-card-content>
+										</md-card>
+                                </div>
+                                                </div>
+                            {% endraw %}
+                            </div>
+                                </div>
+
+
+					</div>
+		</section>
+		<hr>
 
 
 
-{% endblock %}
+	{% endblock %}
