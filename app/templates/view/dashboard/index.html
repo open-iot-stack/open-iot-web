@@ -2,6 +2,9 @@
 	{% block body %}
 
 		<body ng-controller="WinkController">
+
+         <div data-ng-controller="WinkController" data-ng-init="getIcons()">
+             </div>
 		<section class="hero"  ng-cloak>
 			  <div data-ng-controller="WinkController" data-ng-init="getDevices()">
 				   <md-progress-linear ng-hide="devices" md-mode="indeterminate"></md-progress-linear>
@@ -51,7 +54,7 @@
 
 									   <div class="md-list-item-text">
 											<p><b>Brightness:</b>{{device.desired_state.brightness}},<b>Powered:</b>{{device.desired_state.powered}}</p>
-												</div>
+                                       </div>
 												  </md-list-item>
 											</md-card-content>
 										</md-card>

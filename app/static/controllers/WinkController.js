@@ -174,5 +174,30 @@ app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token'
 
           }
 
+          $scope.getIcons = function(data){
+              var urlBase = "https://winkapi.quirky.com";
+
+
+                   Token.getToken().then(
+                   function(token){
+
+                       $http({
+                        method: 'GET',
+                        url:urlBase+'/icons/',
+                        headers:{
+                            Authorization : 'Bearer ' + token
+                        }
+                       }).success(function (results) {
+                             $scope.icons = results.data;
+                       }).error(function (error) {
+                             $log.log(error);
+                       });
+
+                   })
+
+
+
+          }
+
       }]
     );
