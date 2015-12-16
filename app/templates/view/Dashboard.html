@@ -108,7 +108,7 @@
                                             <md-card-content>
 								 <md-list-item class="md-4-line">
                                      <div class="md-list-item-text">
- <md-progress-linear class="md-primary" md-mode="determinate" value="{{device.last_reading.remaining*100}}"></md-progress-linear>
+ <md-progress-linear class="md-primary" md-mode="md-warn" value="{{device.last_reading.remaining*100}}" md-buffer-value="100"></md-progress-linear>
                                      <p>
                                         {{ device.last_reading.remaining * 100}}% of the fuel is remaining.
                                         <br> Average Grill Time - {{ grill_stats.average_grill_time }}
