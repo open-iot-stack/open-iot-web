@@ -10,7 +10,7 @@
 				   <md-progress-linear ng-hide="devices" md-mode="indeterminate"></md-progress-linear>
 					{% raw %}
 						<div ng-show="devices">
-							<div ng-repeat="device in devices">
+							<div ng-repeat="device in devices | orderBy:'name'">
 								<div class="medium-4 column">
 									<div ng-if="device.name == 'Link hub'||device.name == 'Hub'">
 										 <md-card>
