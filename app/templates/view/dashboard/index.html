@@ -51,8 +51,10 @@
 								 <md-list-item class="md-4-line">
 
 									   <div class="md-list-item-text">
+                       <div ng-if="device.desired_state.powered">
                        <md-slider flex class="md-primary" md-discrete ng-change="updateLight(device)" ng-model="device.desired_state.brightness" step="0.1" min="0" max="1" aria-label="rating">
                        </md-slider>
+                     </div>
 											<p><b>Brightness:</b>{{device.desired_state.brightness}},<b>Powered:</b>{{device.desired_state.powered}}</p>
                      </div>
 								</md-list-item>
