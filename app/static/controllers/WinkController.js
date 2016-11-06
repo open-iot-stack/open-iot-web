@@ -35,15 +35,15 @@ app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token'
                                   Authorization: 'Bearer ' + token
                               }
                           }).success(function (results) {
-                              //  $log.log(results);
+                              $scope.prev_devices = angular.copy($scope.devices);
                               $scope.devices = results.data;
                           }).
                               error(function (error) {
                                   $log.log(error);
                               });
-                          // continue to call the poller() function every 2 seconds
+                          // continue to call the poller() function every 5 seconds
                           // until the timeout is cancelled
-                          timeout = $timeout(poller, 2000);
+                          timeout = $timeout(poller, 5000);
                       });
               }
 
@@ -93,7 +93,7 @@ app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token'
                     } else { data.desired_state.powered = true;}
                     var type="";
                     var id ="";
-                if(data.model_name == 'Switch'){
+                if(data.model_name == 'Binary Switch'){
                     type="binary_switches";
 
                     id = data.binary_switch_id;
@@ -116,6 +116,31 @@ app. controller('WinkController', ['$scope', '$log', '$http', '$timeout','Token'
                       });
             }
 
+          $scope.updateLight = function (data) {
+               var urlBase ="https://winkapi.quirky.com";
+               //$scope.token = null
+              Token.getToken( function (res) {
+              //  $log.log(res);
+               $scope.token = res
+               })
+
+               var type= "light_bulbs";
+               var id = data.light_bulb_id;
+
+                $http({method: 'PUT',
+                url:urlBase+'/'+type+'/'+id,
+                    data: data,
+                headers:{
+                Authorization : 'Bearer ' + token
+                   }}).
+                    success(function (results) {
+                      //  $log.log(results);
+                      //$scope.devices = results.data;
+                    }).
+                    error(function (error) {
+                        $log.log(error);
+                    });
+                  }
            $scope.updateGroupState = function (data) {
                  var urlBase ="https://winkapi.quirky.com";
                  //$scope.token = null

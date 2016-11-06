@@ -43,19 +43,19 @@
 											<md-icon md-font-icon="icon fi fi-lightbulb" style="color: whitesmoke;"/>
 										</div>
 										</md-button>
-                                                       <h3><b>{{device.name}}</b></h3>
-                                                     <span flex></span>
-                                                 <md-switch class="md-primary" ng-click="updateDeviceState(device)" ng-model="device.desired_state.powered" aria-label="Switch 1">
-                                           </md-switch>
-                                                       </div>
+                       <h3><b>{{device.name}}</b></h3>
+                     <span flex></span>
+                       </div>
 							 </md-toolbar>
 											 <md-card-content>
 								 <md-list-item class="md-4-line">
 
 									   <div class="md-list-item-text">
+                       <md-slider flex class="md-primary" md-discrete ng-change="updateLight(device)" ng-model="device.desired_state.brightness" step="0.1" min="0" max="1" aria-label="rating">
+                       </md-slider>
 											<p><b>Brightness:</b>{{device.desired_state.brightness}},<b>Powered:</b>{{device.desired_state.powered}}</p>
-                                       </div>
-												  </md-list-item>
+                     </div>
+								</md-list-item>
 											</md-card-content>
 										</md-card>
 
@@ -83,8 +83,6 @@
 										</md-button>
                                                      <h3><b>{{device.name}}</b></h3>
                                                      <span flex></span>
-                                                 <md-switch class="md-primary" ng-click="updateDeviceState(device)" ng-model="device.desired_state.powered" aria-label="Switch 1">
-                                           </md-switch>
                                                      </div>
 							 </md-toolbar>
 											 <md-card-content>
